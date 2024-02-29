@@ -1,0 +1,48 @@
+{
+  "realm": "megatouch",
+  "enabled": true,
+  "users": [
+    {
+      "username": "admin",
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin"
+        }
+      ],
+      "realmRoles": [
+        "admin"
+      ]
+    }
+  ],
+  "roles": {
+    "realm": [
+      {
+        "name": "admin",
+        "description": "Administrator privileges"
+      }
+    ]
+  },
+  "defaultRoles": [
+    "user"
+  ],
+  "clients": [
+    {
+      "clientAuthenticatorType": "client-secret",
+      "clientId": "megatouch_frontend",
+      "name": "Megatouch Frontend App",
+      "secret": "megatouch_secret",
+      "enabled": true,
+      "redirectUris": [
+        "http://localhost:3000/*"
+      ],
+      "webOrigins": [
+        "http://localhost:3000/*"
+      ],
+      "attributes": {
+       "post.logout.redirect.uris": "http://localhost:3000/*"
+      }
+    }
+  ]
+}

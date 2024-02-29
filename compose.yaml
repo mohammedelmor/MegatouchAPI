@@ -2,8 +2,30 @@ services:
   postgres:
     image: 'postgres:latest'
     environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
+      - 'POSTGRES_DB=megatouch_db'
+      - 'POSTGRES_PASSWORD=touch'
+      - 'POSTGRES_USER=mega'
     ports:
-      - '5432'
+      - '5432:5432'
+    volumes:
+#      - './data:/var/lib/postgresql/data'
+      - './init:/docker-entrypoint-initdb.d'
+  keycloak:
+    image: 'quay.io/keycloak/keycloak:23.0.7'
+    environment:
+      - 'KEYCLOAK_ADMIN=admin'
+      - 'KEYCLOAK_ADMIN_PASSWORD=admin'
+      - 'KC_DB=postgres'
+      - 'KC_DB_URL=jdbc:postgresql://postgres/megatouch_db?currentSchema=keycloak'
+      - 'KC_DB_USERNAME=mega'
+      - 'KC_DB_PASSWORD=touch'
+      - 'KC_IMPORT=/opt/keycloak/data/import/realm.json'
+    depends_on:
+      - postgres
+    ports:
+        - '8080:8080'
+    volumes:
+      - './keycloak/realm.json:/opt/keycloak/data/import/realm.json'
+    command:
+          - start-dev
+          - --import-realm

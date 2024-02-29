@@ -1,0 +1,11 @@
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/megatouch_db
+    username: mega
+    password: touch
+  flyway:
+    user: mega
+    password: touch
+server:
+  port: 9090
