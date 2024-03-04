@@ -1,7 +1,6 @@
 package org.megatouch.api.service;
 
-import org.megatouch.api.dto.InflatableCreateDto;
-import org.megatouch.api.dto.InflatableUpdateDto;
+import org.megatouch.api.dto.inflatable.request.InflatableRequestDto;
 import org.megatouch.api.entity.Inflatable;
 import org.megatouch.api.exception.InflatableAlreadyExistsException;
 import org.megatouch.api.exception.InflatableNotFoundException;
@@ -32,7 +31,7 @@ public class InflatableService {
         return inflatableRepository.findById(id).orElseThrow(() -> new InflatableNotFoundException(id));
     }
 
-    public Inflatable saveInflatable(InflatableCreateDto dto) {
+    public Inflatable saveInflatable(InflatableRequestDto dto) {
         if (exists(dto)) {
             throw new InflatableAlreadyExistsException(dto.enName() , dto.arName());
         }
@@ -50,8 +49,8 @@ public class InflatableService {
         return inflatableRepository.save(inflatable);
     }
 
-    public Inflatable updateInflatable(InflatableUpdateDto dto) {
-        Optional<Inflatable> entity = inflatableRepository.findById(dto.id());
+    public Inflatable updateInflatable(Long id, InflatableRequestDto dto) {
+        Optional<Inflatable> entity = inflatableRepository.findById(id);
         entity.map(inflatable -> {
             inflatable.setEnName(dto.enName());
             inflatable.setArName(dto.arName());
@@ -64,7 +63,7 @@ public class InflatableService {
             inflatable.setImages(dto.images());
             inflatable.setKeywords(dto.keywords());
             return inflatableRepository.save(inflatable);
-        }).orElseThrow(() -> new InflatableNotFoundException(dto.id()));
+        }).orElseThrow(() -> new InflatableNotFoundException(id));
         return entity.get();
     }
 
@@ -75,7 +74,7 @@ public class InflatableService {
         inflatableRepository.deleteById(id);
     }
 
-    public boolean exists(InflatableCreateDto inflatable) {
+    public boolean exists(InflatableRequestDto inflatable) {
         return inflatableRepository.existsByEnName(inflatable.enName()) ||
                         inflatableRepository.existsByArName(inflatable.arName());
     }
