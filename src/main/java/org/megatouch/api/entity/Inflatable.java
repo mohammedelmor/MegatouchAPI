@@ -16,7 +16,9 @@ public class Inflatable {
     @SequenceGenerator(name = "inflatable_seq", sequenceName = "inflatable_seq", allocationSize = 1)
     private Long id;
 
+    @Column(unique = true)
     private String enName;
+    @Column(unique = true)
     private String arName;
     private String enDescription;
     private String arDescription;

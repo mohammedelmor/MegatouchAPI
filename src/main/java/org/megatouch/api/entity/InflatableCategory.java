@@ -14,7 +14,9 @@ public class InflatableCategory {
     @SequenceGenerator(name = "inflatable_category_seq", sequenceName = "inflatable_category_seq", allocationSize = 1)
     private Long id;
 
+    @Column(unique = true)
     private String enName;
+    @Column(unique = true)
     private String arName;
 
 
