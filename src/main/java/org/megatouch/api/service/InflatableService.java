@@ -23,8 +23,8 @@ public class InflatableService {
         this.inflatableCategoryService = inflatableCategoryService;
     }
 
-    public Page<Inflatable> getInflatables(int page, int size) {
-        return inflatableRepository.findAll(PageRequest.of(page, size, Sort.by("id").ascending()));
+    public Page<Inflatable> findAll(int page, int size) {
+        return inflatableRepository.findAll(PageRequest.of(1 - page, size, Sort.by("id").ascending()));
     }
 
     public Inflatable getInflatable(Long id) throws InflatableNotFoundException {
