@@ -5,6 +5,11 @@ import org.megatouch.api.dto.inflatable.request.InflatableRequestDto;
 import org.megatouch.api.entity.Inflatable;
 import org.megatouch.api.service.InflatableService;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +20,12 @@ public class InflatableController {
 
     public InflatableController(InflatableService inflatableService) {
         this.inflatableService = inflatableService;
+    }
+
+    @GetMapping("/admin")
+    @PreAuthorize("hasRole('admin')")
+    public ResponseEntity<String> auth() {
+        return ResponseEntity.ok("Only admin can see this!!!");
     }
 
     @GetMapping

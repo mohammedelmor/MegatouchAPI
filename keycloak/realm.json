@@ -14,6 +14,19 @@
       "realmRoles": [
         "admin"
       ]
+    },
+    {
+      "username": "user",
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user"
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
     }
   ],
   "roles": {
@@ -21,6 +34,10 @@
       {
         "name": "admin",
         "description": "Administrator privileges"
+      },
+      {
+        "name": "user",
+        "description": "normal privileges"
       }
     ]
   },
@@ -42,7 +59,7 @@
         "http://localhost:3000/*"
       ],
       "attributes": {
-       "post.logout.redirect.uris": "http://localhost:3000/*"
+        "post.logout.redirect.uris": "http://localhost:3000/*"
       }
     }
   ]
