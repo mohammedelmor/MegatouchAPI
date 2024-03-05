@@ -4,8 +4,6 @@ import org.megatouch.api.entity.Inflatable;
 import org.megatouch.api.entity.InflatableCategory;
 import org.megatouch.api.repository.InflatableCategoryRepository;
 import org.megatouch.api.repository.InflatableRepository;
-import org.megatouch.api.service.InflatableCategoryService;
-import org.megatouch.api.service.InflatableService;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
@@ -29,8 +27,8 @@ public class DataLoader {
     @EventListener(ApplicationReadyEvent.class)
     public void loadData() {
 
-        inflatableCategoryRepository.deleteAll();
         inflatableRepository.deleteAll();
+        inflatableCategoryRepository.deleteAll();
 
         var inflatableCategory1 = new InflatableCategory();
         inflatableCategory1.setEnName("Category 1");
