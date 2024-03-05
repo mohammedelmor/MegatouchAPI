@@ -32,6 +32,7 @@
       "clientAuthenticatorType": "client-secret",
       "clientId": "megatouch_frontend",
       "name": "Megatouch Frontend App",
+      "directAccessGrantsEnabled": true,
       "secret": "megatouch_secret",
       "enabled": true,
       "redirectUris": [
