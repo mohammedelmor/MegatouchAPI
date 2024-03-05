@@ -3,13 +3,10 @@ spring:
     url: jdbc:postgresql://localhost:5432/megatouch_db
     username: mega
     password: touch
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: "http://keycloak:8080/realms/megatouch/protocol/openid-connect/certs"
   flyway:
     user: mega
     password: touch
 server:
   port: 9090
+keycloak:
+  keySet: http://localhost:8080/realms/megatouch/protocol/openid-connect/certs
